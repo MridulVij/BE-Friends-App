@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:guardians_suicide_prevention_app/AppGuide/GetStarted.dart';
-
+import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/get_started.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
       Duration(seconds: 5),
-          () => Navigator.pushReplacement(
+      () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => GetStarted()),
       ),
@@ -36,7 +35,10 @@ class _SplashState extends State<Splash> {
             gradient: LinearGradient(
               begin: Alignment(0.003, 1),
               end: Alignment(0.003, -1),
-              colors: <Color>[Colors.red, Colors.white], // Red to Whitish gradient
+              colors: <Color>[
+                Colors.red,
+                Colors.white
+              ], // Red to Whitish gradient
               stops: <double>[0, 1],
             ),
           ),
@@ -45,7 +47,8 @@ class _SplashState extends State<Splash> {
             children: [
               Container(
                 margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
-                padding: EdgeInsets.fromLTRB(104 * fem, 334 * fem, 111.14 * fem, 0 * fem),
+                padding: EdgeInsets.fromLTRB(
+                    104 * fem, 334 * fem, 111.14 * fem, 0 * fem),
                 width: double.infinity,
                 height: 546 * fem,
                 child: Align(
