@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   url_launcher: ^6.1.14
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/AiChatModel/DisplayPics/therapist.png
+    - assets/AiChatModel/DisplayPics/batman2.png
+    - assets/AiChatModel/ChatBg/chatBG.png
+    - assets/AiChatModel/send1.png
+    - assets/Splash/suicide-prevention-logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
