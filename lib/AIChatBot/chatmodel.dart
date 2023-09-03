@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:guardians_suicide_prevention_app/AIChatBot/chat_messagesUI.dart';
+import 'package:http/http.dart' as http;
+
+import 'chat_messagesUI.dart';
 
 class ChatModel extends StatefulWidget {
   const ChatModel({super.key});
@@ -26,6 +27,7 @@ class _ChatModelState extends State<ChatModel> {
       _messages.insert(0, opening);
     });
   }
+
   void _addMessage(String text, String sender) {
     ChatMessageUI message = ChatMessageUI(text: text, sender: 'User');
     setState(() {
@@ -34,7 +36,8 @@ class _ChatModelState extends State<ChatModel> {
   }
 
   Future<void> sendGptRequest(String userMessage) async {
-    final apiKey = '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'; // Replace with your OpenAI API key
+    final apiKey =
+        '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'; // Replace with your OpenAI API key
     final apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     final headers = {
@@ -66,19 +69,18 @@ class _ChatModelState extends State<ChatModel> {
 
     if (response.statusCode == 200) {
       final responseBody = json.decode(response.body);
-      final assistantResponse = responseBody['choices'][0]['message']['content'];
-      ChatMessageUI aimessage= ChatMessageUI(text: assistantResponse, sender: 'Therapist');
+      final assistantResponse =
+          responseBody['choices'][0]['message']['content'];
+      ChatMessageUI aimessage =
+          ChatMessageUI(text: assistantResponse, sender: 'Therapist');
 
       setState(() {
         _messages.insert(0, aimessage);
       });
-
     } else {
       print('Error: ${response.reasonPhrase}');
     }
   }
-
-
 
   Widget _text_field() {
     return Row(
@@ -101,7 +103,8 @@ class _ChatModelState extends State<ChatModel> {
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Open up, I will help you to the best of my abilities',
+                hintText:
+                    'Open up, I will help you to the best of my abilities',
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 contentPadding: EdgeInsets.only(left: 8),
               ),
