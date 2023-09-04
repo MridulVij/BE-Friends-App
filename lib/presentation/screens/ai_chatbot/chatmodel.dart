@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 
 import 'chat_messagesUI.dart';
 
@@ -14,7 +15,10 @@ class ChatModel extends StatefulWidget {
 class _ChatModelState extends State<ChatModel> {
   final TextEditingController _prompts = TextEditingController();
   final List<ChatMessageUI> _messages = [];
-  List<String> responseList = [];
+  bool isLoading = false;
+
+  final _textFieldStreamController = StreamController<String>();
+  Stream<String> get textFieldStream => _textFieldStreamController.stream;
 
   @override
   void initState() {
@@ -25,6 +29,10 @@ class _ChatModelState extends State<ChatModel> {
     );
     setState(() {
       _messages.insert(0, opening);
+    });
+
+    _prompts.addListener(() {
+      _textFieldStreamController.add(_prompts.text);
     });
   }
 
@@ -37,7 +45,7 @@ class _ChatModelState extends State<ChatModel> {
 
   Future<void> sendGptRequest(String userMessage) async {
     final apiKey =
-        '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'; // Replace with your OpenAI API key
+        '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';
     final apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     final headers = {
@@ -53,13 +61,16 @@ class _ChatModelState extends State<ChatModel> {
           "content": userMessage,
         }
       ],
-      //DO NOT CHANGE THESE PARAMETERS AT ALL !!!
       "temperature": 1.3,
       "max_tokens": 256,
       "top_p": 1,
       "frequency_penalty": 0.95,
       "presence_penalty": 1.1,
     };
+
+    setState(() {
+      isLoading = true;
+    });
 
     final response = await http.post(
       Uri.parse(apiUrl),
@@ -70,12 +81,20 @@ class _ChatModelState extends State<ChatModel> {
     if (response.statusCode == 200) {
       final responseBody = json.decode(response.body);
       final assistantResponse =
-          responseBody['choices'][0]['message']['content'];
-      ChatMessageUI aimessage =
-          ChatMessageUI(text: assistantResponse, sender: 'Therapist');
+      responseBody['choices'][0]['message']['content'];
+      ChatMessageUI aimessage = ChatMessageUI(
+        text: assistantResponse,
+        sender: 'Therapist',
+      );
 
       setState(() {
         _messages.insert(0, aimessage);
+      });
+
+      await Future.delayed(Duration(seconds: 2));
+
+      setState(() {
+        isLoading = false;
       });
     } else {
       print('Error: ${response.reasonPhrase}');
@@ -86,71 +105,87 @@ class _ChatModelState extends State<ChatModel> {
     return Row(
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: TextField(
-              maxLines: null,
-              onSubmitted: (value) {
-                if (value.isNotEmpty) {
-                  _addMessage(value, 'User');
-                  sendGptRequest(value);
-                  _prompts.clear();
-                }
-              },
-              controller: _prompts,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText:
-                    'Open up, I will help you to the best of my abilities',
-                hintStyle: TextStyle(color: Colors.grey[800]),
-                contentPadding: EdgeInsets.only(left: 8),
+          child: Container(
+            height: 65,
+            child: SingleChildScrollView(
+              child: TextField(
+                maxLines: null,
+                onSubmitted: (value) {
+                  if (value.isNotEmpty) {
+                    _addMessage(value, 'User');
+                    sendGptRequest(value);
+                    _prompts.clear();
+                  }
+                },
+                controller: _prompts,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'You can Open Up here...',
+                  hintStyle: TextStyle(color: Colors.grey[800]),
+                  contentPadding: EdgeInsets.only(left: 8),
+                ),
               ),
             ),
           ),
         ),
-        InkWell(
-          onTap: () {
-            if (_prompts.text.isNotEmpty) {
-              _addMessage(_prompts.text, 'User');
-              sendGptRequest(_prompts.text);
-              _prompts.clear();
-            }
-          },
-          child: Container(
-            width: 40,
-            height: 40,
-            margin: EdgeInsets.only(left: 20),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/AiChatModel/send1.png'),
-                fit: BoxFit.cover,
+        StreamBuilder<String>(
+          stream: textFieldStream,
+          builder: (context, snapshot) {
+            return InkWell(
+              onTap: () {
+                if (_prompts.text.isNotEmpty) {
+                  _addMessage(_prompts.text, 'User');
+                  sendGptRequest(_prompts.text);
+                  _prompts.clear();
+                }
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                margin: EdgeInsets.only(left: 20),
+                decoration: BoxDecoration(
+                  color: snapshot.data?.isEmpty ?? true
+                      ? Colors.grey[200]
+                      : Colors.deepPurple,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  size: 35,
+                  Icons.send_sharp,
+                  color:
+                  snapshot.data?.isEmpty ?? true ? Colors.grey : Colors.white,
+                ),
               ),
-              shape: BoxShape.circle,
-            ),
-          ),
+            );
+          },
         ),
       ],
     );
   }
 
   @override
+  void dispose() {
+    _textFieldStreamController.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Maddie GPT"),
+        backgroundColor: Colors.deepPurple[50],
+        title: Text(
+          "Maddie GPT",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/AiChatModel/ChatBg/chatBG.png'),
-            ),
-          ),
           child: Column(
             children: [
               Flexible(
@@ -162,13 +197,21 @@ class _ChatModelState extends State<ChatModel> {
                   },
                 ),
               ),
+              if (isLoading == true)
+                LinearProgressIndicator(
+                  backgroundColor: Colors.deepPurple,
+                  color: Colors.blue,
+                ),
+              Divider(
+                height: 1,
+              ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.amber,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+                  padding: EdgeInsets.fromLTRB(5, 2, 5, 0),
                   child: _text_field(),
                 ),
               ),

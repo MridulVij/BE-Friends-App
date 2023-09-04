@@ -7,16 +7,6 @@ class ChatMessageUI extends StatelessWidget {
   final String text;
   final String sender;
 
-  String getAvatarImagePath() {
-    if (sender == 'User') {
-      return 'assets/AiChatModel/DisplayPics/batman2.png';
-    } else if (sender == 'Therapist') {
-      return 'assets/AiChatModel/DisplayPics/therapist.png';
-    } else {
-      // Handle other senders or default avatar here.
-      return 'assets/DisplayPics/default-avatar.png';
-    }
-  }
 
   void copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
@@ -29,27 +19,32 @@ class ChatMessageUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          margin: EdgeInsets.only(right: 16, bottom: 5),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage(getAvatarImagePath()),
-          ),
-        ),
+
         Expanded(
           child: Column(
+            crossAxisAlignment: sender=='User'? CrossAxisAlignment.end : CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                margin: sender=='User'?
+                EdgeInsets.only(left: 50, bottom: 5, right: 15, top: 5)
+                    : EdgeInsets.only(left: 15, bottom: 5, right: 50, top: 5),
+
+                child: sender=='User'? Text('User',style: TextStyle(fontWeight: FontWeight.bold),
+                ):Text('Maddie',style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               GestureDetector(
                 onLongPress: () => copyToClipboard(context, text),
                 child: Container(
-                  margin:
-                      EdgeInsets.only(left: 5, bottom: 5, right: 10, top: 5),
+                  margin: sender=='User'?
+                  EdgeInsets.only(left: 10, bottom: 5, right: 15, top: 2)
+                      : EdgeInsets.only(left: 15, bottom: 5, right: 10, top: 2),
+
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.deepPurple[50],
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     text,
