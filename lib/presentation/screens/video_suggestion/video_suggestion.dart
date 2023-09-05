@@ -259,9 +259,3 @@ List<String> fitnessFAQs = [
   'How to be motivated',
   'How to think positive'
 ];
-
-void main() {
-  runApp(MaterialApp(
-    home: HelpAndSupport(),
-  ));
-}

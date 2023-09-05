@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/ai_chatbot/chatmodel.dart';
+import 'package:guardians_suicide_prevention_app/route_names.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -16,12 +17,7 @@ class _GetStartedState extends State<GetStarted> {
         child: Container(
           child: ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatModel(),
-                  ),
-                );
+                Navigator.pushNamed(context, RoutesName.dashboardMain);
               },
               child: Text("Get Started")),
         ),
