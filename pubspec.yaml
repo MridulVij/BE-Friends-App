@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.0.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -60,10 +60,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/AiChatModel/DisplayPics/therapist.png
-    - assets/AiChatModel/DisplayPics/batman2.png
-    - assets/AiChatModel/ChatBg/chatBG.png
-    - assets/AiChatModel/send1.png
     - assets/Splash/suicide-prevention-logo.png
 
   # To add assets to your application, add an assets section, like this:
