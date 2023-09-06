@@ -12,8 +12,8 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 5),
-          () => Navigator.pushReplacement(
+      const Duration(seconds: 5),
+      () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => GetStarted()),
       ),
@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
         width: double.infinity,
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment(0.003, 1),
               end: Alignment(0.003, -1),
@@ -54,15 +54,15 @@ class _SplashState extends State<Splash> {
                   0 * fem,
                 ),
                 width: double.infinity,
-                height: 546 * fem,
+                height: 500 * fem,
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ClipOval(
                     clipBehavior: Clip.hardEdge,
                     child: Container(
                       color: Colors.transparent,
-                      width: 214 * fem, // Adjust as needed
-                      height: 214 * fem, // Adjust as needed
+                      width: 100 * fem, // Adjust as needed
+                      height: 100 * fem, // Adjust as needed
                       child: Image.asset(
                         'assets/Splash/suicide-prevention-logo.png',
                         fit: BoxFit.fill,

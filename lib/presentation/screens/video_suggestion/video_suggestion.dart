@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../route_names.dart';
+
 class HelpAndSupport extends StatefulWidget {
   const HelpAndSupport({super.key});
 
@@ -15,10 +17,23 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
   bool isNotFound = false;
 
   Map<String, String> keywordToVideoMap = {
-    'keyword1': 'https://www.youtube.com/watch?v=VIDEO_ID_1',
-    'keyword2': 'https://www.youtube.com/watch?v=VIDEO_ID_2',
+    'keyword1': 'https://www.youtube.com/watch?v=XcPm87kd5bo',
+    'keyword2': 'https://www.youtube.com/watch?v=zCTWQ8uF78s',
+    'keyword3': 'https://www.youtube.com/watch?v=HciVBhstSQ4',
+    'keyword4': 'https://www.youtube.com/watch?v=HciVBhstSQ4',
     // Add more keyword-video URL pairs as needed
   };
+
+  List<String> fitnessFAQs = [
+    'WHAT is Anxiety and HOW to Deal with it',
+    'Do you have suicidal thoughts? Extreme Depression',
+    'Youtubers CANNOT Solve your Depression',
+    'How to work when depressed Bhagwan ka naam lo aur Kaam karo'
+        'How to get out from depression',
+    'How to get rid from suicidal thoughts',
+    'How to be motivated',
+    // '091529 87821',
+  ];
 
   String selectedVideoLink = "";
 
@@ -103,48 +118,54 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextFormField(
-                  controller: searchController,
-                  onFieldSubmitted: (value) {
-                    search(value.trim());
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Enter Problem for Video Solution!",
-                    suffix: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.red,
+                SizedBox(
+                  height: 60,
+                  child: TextFormField(
+                    controller: searchController,
+                    onFieldSubmitted: (value) {
+                      search(value.trim());
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      hintText: "Enter Your Problem!",
+                      suffix: IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          search(searchController.text.trim());
+                        },
                       ),
-                      onPressed: () {
-                        search(searchController.text.trim());
-                      },
                     ),
                   ),
                 ),
                 Expanded(
                   child: selectedVideoLink.isNotEmpty
-                      ? ListView(
-                          children: [
-                            ListTile(
-                              onTap: () {
-                                // Open the selected video link
-                                launchUrl(
-                                  Uri.parse(selectedVideoLink),
-                                );
-                              },
-                              title: Text(
-                                "Open Video",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
+                      ? Container()
+                      // ? ListView(
+                      //     children: [
+                      //       ListTile(
+                      //         onTap: () {
+                      //           // Open the selected video link
+                      //           launchUrl(
+                      //             Uri.parse(selectedVideoLink),
+                      //           );
+                      //         },
+                      //         title: const Text(
+                      //           "Open Video",
+                      //           style: TextStyle(
+                      //             fontSize: 14,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   )
                       : matchQuery.isEmpty && !isNotFound
                           ? ListView.builder(
                               itemCount: fitnessFAQs.length,
@@ -176,7 +197,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                         Expanded(
                                           child: Text(
                                             fitnessFAQs[index],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 14,
                                             ),
                                           ),
@@ -184,7 +205,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                       ],
                                     ),
                                   ),
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.arrow_forward_ios,
                                     size: 16,
                                     color: Colors.red,
@@ -196,8 +217,11 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                               visible: !isNotFound,
                               replacement: ListTile(
                                   title: TextButton(
-                                onPressed: () {},
-                                child: Text("Ask Question"),
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, RoutesName.chatbot);
+                                },
+                                child: const Text("Ask Question"),
                               )),
                               child: ListView.builder(
                                 itemCount: matchQuery.length,
@@ -227,14 +251,14 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                         Expanded(
                                           child: Text(
                                             matchQuery[index],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 14,
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    trailing: Icon(
+                                    trailing: const Icon(
                                       Icons.arrow_forward_ios,
                                       size: 16,
                                       color: Colors.red,
@@ -252,10 +276,3 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
     );
   }
 }
-
-List<String> fitnessFAQs = [
-  'How to get out from depression',
-  'How to get rid from suicidal thoughts',
-  'How to be motivated',
-  'How to think positive'
-];
