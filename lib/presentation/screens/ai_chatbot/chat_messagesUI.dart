@@ -31,7 +31,7 @@ class ChatMessageUI extends StatelessWidget {
                     : EdgeInsets.only(left: 15, bottom: 5, right: 50, top: 5),
 
                 child: sender=='User'? Text('User',style: TextStyle(fontWeight: FontWeight.bold),
-                ):Text('Maddie',style: TextStyle(fontWeight: FontWeight.bold),
+                ):Text('ChatBot',style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               GestureDetector(

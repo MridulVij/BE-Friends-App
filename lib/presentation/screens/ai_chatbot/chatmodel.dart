@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 import 'chat_messagesUI.dart';
@@ -23,16 +24,59 @@ class _ChatModelState extends State<ChatModel> {
   @override
   void initState() {
     super.initState();
-    ChatMessageUI opening = ChatMessageUI(
-      text: 'This is a safe space, we can talk about your feelings safely',
-      sender: 'Therapist',
-    );
-    setState(() {
-      _messages.insert(0, opening);
-    });
 
-    _prompts.addListener(() {
-      _textFieldStreamController.add(_prompts.text);
+    // Initialize SharedPreferences
+    SharedPreferences.getInstance().then((prefs) {
+      final bool understood = prefs.getBool('understood') ?? false;
+
+      if (!understood) {
+        // Show an initial alert dialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Disclaimer"),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Text(
+                      "This AI chat bot is not a replacement for professional help. If your situation is critical, please seek immediate assistance from a qualified professional.",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        prefs.setBool('understood', true); // Store the user's understanding
+                      },
+                      child: Text(
+                        "I Understand",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple[500], // Button color
+                        onPrimary: Colors.white, // Text color
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
+
+      ChatMessageUI opening = ChatMessageUI(
+        text: 'This is a safe space, we can talk about your feelings safely',
+        sender: 'Therapist',
+      );
+      setState(() {
+        _messages.insert(0, opening);
+      });
+
+      _prompts.addListener(() {
+        _textFieldStreamController.add(_prompts.text);
+      });
     });
   }
 
@@ -179,7 +223,7 @@ class _ChatModelState extends State<ChatModel> {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[50],
         title: Text(
-          "Maddie GPT",
+          "Personal ChatBot",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
