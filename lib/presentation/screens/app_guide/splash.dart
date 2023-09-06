@@ -13,7 +13,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
       Duration(seconds: 5),
-      () => Navigator.pushReplacement(
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => GetStarted()),
       ),
@@ -36,9 +36,9 @@ class _SplashState extends State<Splash> {
               begin: Alignment(0.003, 1),
               end: Alignment(0.003, -1),
               colors: <Color>[
-                Colors.red,
-                Colors.white
-              ], // Red to Whitish gradient
+                Color(0xFFC7A3E7), // Light purplish color
+                Color(0xFF4A00E0), // Deep purple color
+              ],
               stops: <double>[0, 1],
             ),
           ),
@@ -48,17 +48,25 @@ class _SplashState extends State<Splash> {
               Container(
                 margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                 padding: EdgeInsets.fromLTRB(
-                    104 * fem, 334 * fem, 111.14 * fem, 0 * fem),
+                  104 * fem,
+                  334 * fem,
+                  111.14 * fem,
+                  0 * fem,
+                ),
                 width: double.infinity,
                 height: 546 * fem,
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    width: 214 * fem,
-                    height: 212 * fem,
-                    child: Image.asset(
-                      'assets/Splash/suicide-prevention-logo.png',
-                      fit: BoxFit.fitWidth,
+                  child: ClipOval(
+                    clipBehavior: Clip.hardEdge,
+                    child: Container(
+                      color: Colors.transparent,
+                      width: 214 * fem, // Adjust as needed
+                      height: 214 * fem, // Adjust as needed
+                      child: Image.asset(
+                        'assets/Splash/suicide-prevention-logo.png',
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.1.14
   http: ^1.1.0
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/Splash/suicide-prevention-logo.png
+    - assets/icons/
+    - assets/getStarted.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

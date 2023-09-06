@@ -38,8 +38,9 @@ class _DashboardMainState extends State<DashboardMain> {
                 });
               },
               items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
+                //changed icons
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/icons/chatbot.png')), label: "ChatBot"),
               ])
           // ElevatedButton(
           // currentIndex: _currentIndex,

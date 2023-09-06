@@ -13,7 +13,7 @@ class Routes {
       case RoutesName.splashScreen:
         return MaterialPageRoute(builder: (context) => Splash());
       case RoutesName.getStarted:
-        return MaterialPageRoute(builder: (context) => const GetStarted());
+        return MaterialPageRoute(builder: (context) =>  GetStarted());
       case RoutesName.chatbot:
         return MaterialPageRoute(builder: (context) => const ChatModel());
 
