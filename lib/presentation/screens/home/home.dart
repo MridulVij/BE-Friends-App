@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/video_suggestion/shorts_videos.dart';
 
 import '../ai_chatbot/chatmodel.dart';
 import '../video_suggestion/video_suggestion.dart';
@@ -12,7 +13,7 @@ class DashboardMain extends StatefulWidget {
 
 class _DashboardMainState extends State<DashboardMain> {
   int _currentIndex = 0;
-  List<Widget> _bottomNavbarScreens = [HelpAndSupport(), ChatModel()];
+  List<Widget> _bottomNavbarScreens = [HelpAndSupport(),ShortVideos(), ChatModel()];
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class _DashboardMainState extends State<DashboardMain> {
               items: const [
                 //changed icons
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/icons/shorts.png')), label: "Shorts"),
                 BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/icons/chatbot.png')), label: "ChatBot"),
               ])
           // ElevatedButton(
