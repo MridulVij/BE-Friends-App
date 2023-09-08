@@ -58,7 +58,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
     "Hope in Darkness: Stories of Triumph Over Depression",
     "Coping with Crisis: Strategies for Preventing Suicidal Thoughts",
     "Embracing Life: A Journey from Depression to Happiness",
-    "Mindfulness and Mental Health: Tools for Anxiety and Dep,ression Prevention",
+    "Mindfulness and Mental Health: Tools for Anxiety and Depression Prevention",
     "Suicide Prevention in Teens: A Parent's Guide",
     "Finding Light in the Shadows: Overcoming Depression and Despair",
     "Building Resilience: A Path to Preventing Depression and Anxiety",
