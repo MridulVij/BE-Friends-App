@@ -218,13 +218,16 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    String? videoLink =
-                                        keywordToVideoMap['keyword1'];
+                                    // here is a problem
+                                    String? videoLink = keywordToVideoMap[
+                                        keywordToVideoMap.keys.first];
                                     if (videoLink != null) {
                                       launchUrl(
                                         Uri.parse(videoLink),
                                       );
                                     }
+                                    // print(keywordToVideoMap.keys.);
+                                    print(videoLink);
                                   },
                                   child: Card(
                                     elevation: 3,
@@ -243,7 +246,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                             fitnessFAQs[index],
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                             ),
                                           ),
                                         ],
@@ -275,8 +278,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      String? videoLink =
-                                          keywordToVideoMap['keyword1'];
+                                      String? videoLink = keywordToVideoMap[
+                                          keywordToVideoMap.values];
                                       if (videoLink != null) {
                                         launchUrl(
                                           Uri.parse(videoLink),
@@ -300,7 +303,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                               matchQuery[index],
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 11,
                                               ),
                                             ),
                                           ],
