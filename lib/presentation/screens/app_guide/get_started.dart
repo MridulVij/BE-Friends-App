@@ -65,7 +65,10 @@ class _GetStartedState extends State<GetStarted> {
                         gradient: LinearGradient(
                           begin: Alignment(-0.795, 0.767),
                           end: Alignment(0.831, -0.807),
-                          colors: <Color>[Color(0xff990099), Color(0xff660066)], // Darker purple shades
+                          colors: <Color>[
+                            Color(0xff990099),
+                            Color(0xff660066)
+                          ], // Darker purple shades
                           stops: <double>[0, 1],
                         ),
                       ),
@@ -74,7 +77,6 @@ class _GetStartedState extends State<GetStarted> {
                 ),
               ),
             ),
-
             Positioned(
               left: 0 * fem,
               top: 163 * fem,
@@ -196,7 +198,8 @@ class _GetStartedState extends State<GetStarted> {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, RoutesName.dashboardMain);
+                            Navigator.pushReplacementNamed(
+                                context, RoutesName.dashboardMain);
                           },
                           child: Text(
                             'GET STARTED',
@@ -216,7 +219,6 @@ class _GetStartedState extends State<GetStarted> {
                 ),
               ),
             ),
-
           ],
         ),
       ),

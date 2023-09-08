@@ -10,14 +10,11 @@ class ShortVideos extends StatefulWidget {
 
 class _ShortVideosState extends State<ShortVideos> {
   List<String> videoIds = [
-    'fphKTt5SaBw',
-    'IbJNUrF8b34',
-    '_8SWEj7Y8qE',
-    'rDlXlJbb4H0',
-    'ZdhXi7lW1Oo',
-    'XKgpnhjclH0',
-    'Zjw7kzLbt0c'
-    // Add more video IDs as needed ONLY OF SHORTS!!!
+    // Add your video IDs here
+    "bhxL58ezHJ8", "WYF0v7itMl4", "OfCfZHbeD_k", "BssmH0dW0-E", "23ycQ-r1zCc",
+    "LtKrmKlbcBs", "29DXrS0bBcU", "oiAcCRtiM3s", "K7USVFczhow", "M-TS9NZRdn0",
+    "UoxJl2QgfK0", "X_eyw9AWm9g", "f65wyUWOyPM", "6aGQJduanF4",
+    "6aGQJduanF4", "ghXo5bJ81zE", "eV_3_KcDj4o",
   ];
   int currentVideoIndex = 0;
   late YoutubePlayerController _controller;
@@ -26,16 +23,13 @@ class _ShortVideosState extends State<ShortVideos> {
   @override
   void initState() {
     super.initState();
-
-    // Shuffle the videoIds list to randomize the order
-    videoIds.shuffle();
-
+    // Initialize the controller and set video options
     _controller = YoutubePlayerController(
       initialVideoId: videoIds[currentVideoIndex],
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         loop: true,
         mute: false,
-        autoPlay: true, // Autoplay the first video
+        autoPlay: true,
         forceHD: false,
         controlsVisibleAtStart: false,
         isLive: false,
@@ -56,22 +50,19 @@ class _ShortVideosState extends State<ShortVideos> {
         }
       });
     }
-
   }
 
   void _playNextVideo() {
-    setState(() {
-      isPaused = false;
-    });
     if (currentVideoIndex < videoIds.length - 1) {
       setState(() {
         currentVideoIndex++;
+        isPaused = false;
       });
     } else {
-      // If we're at the last video, go back to the first video and shuffle again
-      videoIds.shuffle();
+      // If we're at the last video, go back to the first video
       setState(() {
         currentVideoIndex = 0;
+        isPaused = false;
       });
     }
     // Load and play the new video
@@ -80,18 +71,16 @@ class _ShortVideosState extends State<ShortVideos> {
   }
 
   void _playPreviousVideo() {
-    setState(() {
-      isPaused = false;
-    });
     if (currentVideoIndex > 0) {
       setState(() {
         currentVideoIndex--;
+        isPaused = false;
       });
     } else {
-      // If we're at the first video, go to the last video and shuffle again
-      videoIds.shuffle();
+      // If we're at the first video, go to the last video
       setState(() {
         currentVideoIndex = videoIds.length - 1;
+        isPaused = false;
       });
     }
     // Load and play the new video
@@ -113,44 +102,27 @@ class _ShortVideosState extends State<ShortVideos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("QuickBytes",style: TextStyle(fontWeight:FontWeight.bold),),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onVerticalDragEnd: (details) {
+                if (details.primaryVelocity! > 0) {
+                  // Swipe down
+                  _playNextVideo();
+                } else if (details.primaryVelocity! < 0) {
+                  // Swipe up
+                  _playPreviousVideo();
+                }
+              },
+              onTap: _togglePause,
               child: YoutubePlayer(
                 controller: _controller,
-                showVideoProgressIndicator: false,
+                showVideoProgressIndicator: true,
                 progressIndicatorColor: Colors.deepPurple,
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FloatingActionButton(
-                onPressed: _playPreviousVideo,
-                backgroundColor: Colors.deepPurple,
-                child: Icon(Icons.skip_previous),
-              ),
-              FloatingActionButton(
-                backgroundColor: Colors.deepPurple,
-                onPressed: _togglePause,
-                child: Icon(isPaused ? Icons.play_arrow : Icons.pause),
-              ),
-              FloatingActionButton(
-                backgroundColor: Colors.deepPurple,
-                onPressed: _playNextVideo,
-                child: Icon(Icons.skip_next),
-              ),
-            ],
-          ),
-          SizedBox(height: 20,)
         ],
       ),
     );
@@ -162,5 +134,3 @@ class _ShortVideosState extends State<ShortVideos> {
     super.dispose();
   }
 }
-
-

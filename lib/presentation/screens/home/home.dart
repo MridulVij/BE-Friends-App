@@ -13,7 +13,11 @@ class DashboardMain extends StatefulWidget {
 
 class _DashboardMainState extends State<DashboardMain> {
   int _currentIndex = 0;
-  List<Widget> _bottomNavbarScreens = [HelpAndSupport(),ShortVideos(), ChatModel()];
+  List<Widget> _bottomNavbarScreens = [
+    HelpAndSupport(),
+    ShortVideos(),
+    ChatModel()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +44,14 @@ class _DashboardMainState extends State<DashboardMain> {
               },
               items: const [
                 //changed icons
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-                BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/icons/shorts.png')), label: "Shorts"),
-                BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/icons/chatbot.png')), label: "ChatBot"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: "Videos"),
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage('assets/icons/shorts.png')),
+                    label: "Shorts"),
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage('assets/icons/chatbot.png')),
+                    label: "ChatBot"),
               ])
           // ElevatedButton(
           // currentIndex: _currentIndex,
