@@ -117,6 +117,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
           }
         },
         child: Scaffold(
+          appBar: AppBar(title: const Text("Safiety Prevention App")),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
