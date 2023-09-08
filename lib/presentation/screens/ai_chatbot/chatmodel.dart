@@ -227,6 +227,7 @@ class _ChatModelState extends State<ChatModel> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Container(

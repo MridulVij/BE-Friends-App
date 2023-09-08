@@ -28,7 +28,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
     'WHAT is Anxiety and HOW to Deal with it',
     'Do you have suicidal thoughts? Extreme Depression',
     'Youtubers CANNOT Solve your Depression',
-    'How to work when depressed Bhagwan ka naam lo aur Kaam karo'
+    'Bhagwan ka naam lo aur Kaam karo '
         'How to get out from depression',
     'How to get rid from suicidal thoughts',
     'How to be motivated',
@@ -99,13 +99,12 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
       child: WillPopScope(
         onWillPop: () async {
           if (selectedVideoLink.isNotEmpty) {
-            // Clear the selected video link and search results
             setState(() {
               selectedVideoLink = "";
               matchQuery.clear();
               isNotFound = false;
             });
-            return false; // Prevent back navigation when a video is open
+            return false;
           } else if (matchQuery.isNotEmpty || isNotFound) {
             search("");
             matchQuery.clear();
@@ -117,7 +116,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
           }
         },
         child: Scaffold(
-          appBar: AppBar(title: const Text("Safiety Prevention App")),
+          appBar: AppBar(title: Text("BE Friends"),),
+        
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
@@ -132,7 +132,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                     },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       hintText: "Enter Your Problem!",
                       suffix: IconButton(
                         icon: const Icon(
@@ -149,125 +150,111 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                 Expanded(
                   child: selectedVideoLink.isNotEmpty
                       ? Container()
-                      // ? ListView(
-                      //     children: [
-                      //       ListTile(
-                      //         onTap: () {
-                      //           // Open the selected video link
-                      //           launchUrl(
-                      //             Uri.parse(selectedVideoLink),
-                      //           );
-                      //         },
-                      //         title: const Text(
-                      //           "Open Video",
-                      //           style: TextStyle(
-                      //             fontSize: 14,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   )
                       : matchQuery.isEmpty && !isNotFound
-                          ? ListView.builder(
-                              itemCount: fitnessFAQs.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  onTap: () {
-                                    // Handle opening the video link here
-                                    String? videoLink =
-                                        keywordToVideoMap['keyword1'];
-                                    if (videoLink != null) {
-                                      launchUrl(
-                                        Uri.parse(videoLink),
-                                      );
-                                    }
-                                  },
-                                  splashColor: Colors.grey,
-                                  title: SizedBox(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(4),
-                                          child: Image.network(
-                                            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
-                                            height: 30,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            fitnessFAQs[index],
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                      ? GridView.builder(
+                    gridDelegate:
+                    SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Number of columns
+                      mainAxisSpacing: 10, // Vertical spacing
+                      crossAxisSpacing: 10, // Horizontal spacing
+                    ),
+                    itemCount: fitnessFAQs.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          String? videoLink =
+                          keywordToVideoMap['keyword1'];
+                          if (videoLink != null) {
+                            launchUrl(
+                              Uri.parse(videoLink),
+                            );
+                          }
+                        },
+                        child: Card(
+                          elevation: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment:
+                              MainAxisAlignment.center,
+                              children: [
+                                Image.network(
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
+                                  height: 40,
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  fitnessFAQs[index],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                      : Visibility(
+                    visible: !isNotFound,
+                    replacement: ListTile(
+                      title: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RoutesName.chatbot);
+                        },
+                        child: const Text("Ask Question"),
+                      ),
+                    ),
+                    child: GridView.builder(
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of columns
+                        mainAxisSpacing: 10, // Vertical spacing
+                        crossAxisSpacing: 10, // Horizontal spacing
+                      ),
+                      itemCount: matchQuery.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            String? videoLink =
+                            keywordToVideoMap['keyword1'];
+                            if (videoLink != null) {
+                              launchUrl(
+                                Uri.parse(videoLink),
+                              );
+                            }
+                          },
+                          child: Card(
+                            elevation: 3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+                                  Image.network(
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
+                                    height: 40,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    matchQuery[index],
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 14,
                                     ),
                                   ),
-                                  trailing: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 16,
-                                    color: Colors.red,
-                                  ),
-                                );
-                              },
-                            )
-                          : Visibility(
-                              visible: !isNotFound,
-                              replacement: ListTile(
-                                  title: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, RoutesName.chatbot);
-                                },
-                                child: const Text("Ask Question"),
-                              )),
-                              child: ListView.builder(
-                                itemCount: matchQuery.length,
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    onTap: () {
-                                      String? videoLink =
-                                          keywordToVideoMap['keyword1'];
-                                      if (videoLink != null) {
-                                        launchUrl(
-                                          Uri.parse(videoLink),
-                                        );
-                                      }
-                                    },
-                                    splashColor: Colors.grey,
-                                    title: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(4),
-                                          child: Image.network(
-                                            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
-                                            height: 30,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            matchQuery[index],
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 16,
-                                      color: Colors.red,
-                                    ),
-                                  );
-                                },
+                                ],
                               ),
                             ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

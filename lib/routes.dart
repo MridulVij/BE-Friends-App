@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/get_started.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/splash.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/video_suggestion/shorts_videos.dart';
 import 'presentation/screens/ai_chatbot/chatmodel.dart';
 import 'presentation/screens/home/home.dart';
 import 'route_names.dart';
@@ -16,6 +17,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) =>  GetStarted());
       case RoutesName.chatbot:
         return MaterialPageRoute(builder: (context) => const ChatModel());
+      case RoutesName.shortVideos:
+        return MaterialPageRoute(builder: (context) => ShortVideos());
 
       default:
         return MaterialPageRoute(
