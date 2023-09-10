@@ -61,8 +61,8 @@ class _SplashState extends State<Splash> {
                     clipBehavior: Clip.hardEdge,
                     child: Container(
                       color: Colors.transparent,
-                      width: 100 * fem, // Adjust as needed
-                      height: 100 * fem, // Adjust as needed
+                      width: 150 * fem, // Adjust as needed
+                      height: 150 * fem, // Adjust as needed
                       child: Image.asset(
                         'assets/Splash/suicide-prevention-logo.png',
                         fit: BoxFit.fill,
