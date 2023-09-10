@@ -286,6 +286,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
+                                          Text("Watch Now!",
+                                              style: TextStyle(fontSize: 9)),
                                           Image.network(
                                             "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
                                             height: 40,
@@ -345,6 +347,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
+                                            Text("Watch Now!",
+                                                style: TextStyle(fontSize: 9)),
                                             Image.network(
                                               "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png",
                                               height: 40,

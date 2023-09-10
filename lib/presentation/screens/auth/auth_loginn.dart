@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_otp.dart';
 
 import '../home/home.dart';
+
 class AuthLOGIN extends StatefulWidget {
   const AuthLOGIN({super.key});
 
@@ -20,11 +21,12 @@ class _AuthLOGINState extends State<AuthLOGIN> {
     country_code.text = '+91';
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
+        margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
@@ -35,23 +37,29 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                 height: 190,
                 width: 190,
               ),
-              SizedBox(height: 10,),
-              Text(
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
                 'Account Login',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize:  22,
+                  fontSize: 22,
                 ),
               ),
-              SizedBox(height: 10,),
-              Text(
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
                 'Lets register your phone first before getting started !',
                 style: TextStyle(
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -62,29 +70,32 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                 ),
                 child: Row(
                   children: [
-                    SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     SizedBox(
+                      width: 40,
                       child: TextField(
                         controller: country_code,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),
-                      width: 40,
                     ),
-                    SizedBox(width: 5,),
-                    Text(
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Text(
                       '|',
-                      style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.grey
-                      ),
+                      style: TextStyle(fontSize: 35, color: Colors.grey),
                     ),
-                    SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       child: TextField(
                         controller: phoneNumberController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Phone Number',
                         ),
@@ -97,17 +108,21 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed:() =>  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AuthOTP())
-                  ),
-                  child: Text("Send One Time Password",style: TextStyle(color: Colors.white),),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const AuthOTP())),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
+                  ),
+                  child: const Text(
+                    "Send One Time Password",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
