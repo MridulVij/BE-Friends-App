@@ -39,6 +39,7 @@ dependencies:
   http: ^1.1.0
   shared_preferences: ^2.2.1
   youtube_player_flutter: ^8.1.2
+  pinput: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
   assets:
     - assets/Splash/suicide-prevention-logo.png
     - assets/icons/
+    - assets/auth/
     - assets/getStarted.png
 
   # To add assets to your application, add an assets section, like this:

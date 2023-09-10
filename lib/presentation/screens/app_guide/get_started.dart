@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_loginn.dart';
 import 'dart:ui';
 
 import 'package:guardians_suicide_prevention_app/route_names.dart';
@@ -198,8 +199,8 @@ class _GetStartedState extends State<GetStarted> {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, RoutesName.dashboardMain);
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => AuthLOGIN()));
                           },
                           child: Text(
                             'GET STARTED',
