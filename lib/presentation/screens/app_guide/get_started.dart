@@ -199,8 +199,8 @@ class _GetStartedState extends State<GetStarted> {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => AuthLOGIN()));
+                            Navigator.pushNamed(
+                                context, RoutesName.authverifier);
                           },
                           child: Text(
                             'GET STARTED',

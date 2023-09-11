@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/auth/google_sign_in_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../route_names.dart';
@@ -219,6 +221,16 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
         child: Scaffold(
           appBar: AppBar(
             title: Text("BE Friends"),
+            actions: [
+              IconButton(
+                  onPressed: () async {
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    await provider.logOut();
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.logout))
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

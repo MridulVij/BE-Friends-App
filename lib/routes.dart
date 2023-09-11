@@ -3,6 +3,7 @@ import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/
 import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/splash.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/video_suggestion/shorts_videos.dart';
 import 'presentation/screens/ai_chatbot/chatmodel.dart';
+import 'presentation/screens/auth/google_sign_in_provider.dart';
 import 'presentation/screens/home/home.dart';
 import 'route_names.dart';
 
@@ -14,11 +15,13 @@ class Routes {
       case RoutesName.splashScreen:
         return MaterialPageRoute(builder: (context) => Splash());
       case RoutesName.getStarted:
-        return MaterialPageRoute(builder: (context) =>  GetStarted());
+        return MaterialPageRoute(builder: (context) => GetStarted());
       case RoutesName.chatbot:
         return MaterialPageRoute(builder: (context) => const ChatModel());
       case RoutesName.shortVideos:
         return MaterialPageRoute(builder: (context) => ShortVideos());
+      case RoutesName.authverifier:
+        return MaterialPageRoute(builder: (context) => AuthVerifier());
 
       default:
         return MaterialPageRoute(

@@ -5,4 +5,5 @@ class RoutesName {
   static const String getStarted = "getstarted";
   static const String dashboardMain = "dashboardMain";
   static const String shortVideos = "shortVideos";
+  static const String authverifier = "authverifier";
 }
