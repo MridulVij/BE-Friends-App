@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_otp.dart';
+import 'package:provider/provider.dart';
 
 import '../home/home.dart';
+import 'google_sign_in_provider.dart';
 
 class AuthLOGIN extends StatefulWidget {
   const AuthLOGIN({super.key});
@@ -14,6 +16,7 @@ class _AuthLOGINState extends State<AuthLOGIN> {
   TextEditingController country_code = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   String phoneNumber = '';
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -41,7 +44,7 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                 height: 10,
               ),
               const Text(
-                'Account Login',
+                'Create Account',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
@@ -51,7 +54,7 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                 height: 10,
               ),
               const Text(
-                'Lets register your phone first before getting started !',
+                'Lets register safely before getting started!',
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -60,72 +63,88 @@ class _AuthLOGINState extends State<AuthLOGIN> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey.shade400,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      width: 40,
-                      child: TextField(
-                        controller: country_code,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text(
-                      '|',
-                      style: TextStyle(fontSize: 35, color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        controller: phoneNumberController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Phone Number',
-                        ),
-                        onChanged: (value) {
-                          // Removing any non-digit characters from text
-                          phoneNumber = value.replaceAll(RegExp(r'[^\d]'), '');
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(5),
+              //     border: Border.all(
+              //       width: 1,
+              //       color: Colors.grey.shade400,
+              //     ),
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       const SizedBox(
+              //         width: 10,
+              //       ),
+              //       SizedBox(
+              //         width: 40,
+              //         child: TextField(
+              //           controller: country_code,
+              //           decoration: const InputDecoration(
+              //             border: InputBorder.none,
+              //           ),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 5,
+              //       ),
+              //       const Text(
+              //         '|',
+              //         style: TextStyle(fontSize: 35, color: Colors.grey),
+              //       ),
+              //       const SizedBox(
+              //         width: 10,
+              //       ),
+              //       Expanded(
+              //         child: TextField(
+              //           controller: phoneNumberController,
+              //           decoration: const InputDecoration(
+              //             border: InputBorder.none,
+              //             hintText: 'Phone Number',
+              //           ),
+              //           onChanged: (value) {
+              //             // Removing any non-digit characters from text
+              //             phoneNumber = value.replaceAll(RegExp(r'[^\d]'), '');
+              //           },
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const AuthOTP())),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                  ),
-                  child: const Text(
-                    "Send One Time Password",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+              _isLoading == true
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : const SizedBox(),
+              // SizedBox(
+              //   height: 50,
+              //   width: double.infinity,
+              //   child: ElevatedButton(
+              //     onPressed: () => Navigator.push(context,
+              //         MaterialPageRoute(builder: (context) => const AuthOTP())),
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Colors.deepPurple,
+              //     ),
+              //     child: const Text(
+              //       "Send One Time Password",
+              //       style: TextStyle(color: Colors.white),
+              //     ),
+              //   ),
+              // ),
+              // google sign in button
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    provider.googleLogin();
+                  },
+                  child: const Text("Sign in with Google"))
             ],
           ),
         ),
