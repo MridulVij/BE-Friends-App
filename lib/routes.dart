@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/get_started.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/splash.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/sos/emergencyCall.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/video_suggestion/shorts_videos.dart';
 import 'presentation/screens/ai_chatbot/chatmodel.dart';
 import 'presentation/screens/auth/google_sign_in_provider.dart';
@@ -22,6 +23,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => ShortVideos());
       case RoutesName.authverifier:
         return MaterialPageRoute(builder: (context) => AuthVerifier());
+      case RoutesName.authverifier:
+        return MaterialPageRoute(builder: (context) => const EmergencyCall());
 
       default:
         return MaterialPageRoute(
