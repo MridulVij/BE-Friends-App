@@ -227,7 +227,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
                     await provider.logOut();
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(
+                        context, RoutesName.getStarted);
                   },
                   icon: Icon(Icons.logout))
             ],
@@ -261,7 +262,9 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Expanded(
                   child: selectedVideoLink.isNotEmpty
                       ? Container()

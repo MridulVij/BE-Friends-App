@@ -38,6 +38,14 @@ class _DashboardMainState extends State<DashboardMain> {
           // ]),
           body: _bottomNavbarScreens[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
+              // selectedLabelStyle
+              // unselectedLabelStyle: ,
+
+              selectedItemColor: Colors.deepPurple,
+              unselectedItemColor: Colors.grey,
+              // selectedIconTheme: const IconThemeData(color: Colors.purple),
+              // unselectedIconTheme: const IconThemeData(color: Colors.grey),
+              type: BottomNavigationBarType.fixed,
               currentIndex: _currentIndex,
               onTap: (index) {
                 setState(() {
@@ -47,15 +55,29 @@ class _DashboardMainState extends State<DashboardMain> {
               items: const [
                 //changed icons
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.home), label: "Videos"),
+                    icon: Icon(
+                      Icons.home,
+                      size: 20,
+                    ),
+                    label: "Videos"),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage('assets/icons/shorts.png')),
+                    icon: ImageIcon(
+                      AssetImage('assets/icons/shorts.png'),
+                      size: 17,
+                    ),
                     label: "Shorts"),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage('assets/icons/chatbot.png')),
+                    icon: ImageIcon(
+                      AssetImage('assets/icons/chatbot.png'),
+                      size: 20,
+                    ),
                     label: "ChatBot"),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage('assets/icons/emergency-call.png')), label: "Help"),
+                    icon: ImageIcon(
+                      AssetImage('assets/icons/emergency-call.png'),
+                      size: 20,
+                    ),
+                    label: "Help"),
               ])
           // ElevatedButton(
           // currentIndex: _currentIndex,

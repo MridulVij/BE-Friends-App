@@ -27,6 +27,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Suicide Prevention App',
           theme: ThemeData(
+            iconTheme: IconThemeData(color: Colors.purple),
+            // appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurple),
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
