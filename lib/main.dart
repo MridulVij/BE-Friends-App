@@ -1,11 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:guardians_suicide_prevention_app/presentation/screens/ai_chatbot/chatmodel.dart';
-import 'package:guardians_suicide_prevention_app/presentation/screens/app_guide/splash.dart';
 import 'package:guardians_suicide_prevention_app/route_names.dart';
 import 'package:provider/provider.dart';
 import 'presentation/screens/auth/google_sign_in_provider.dart';
-import 'presentation/screens/video_suggestion/video_suggestion.dart';
 import 'routes.dart';
 
 void main() async {
