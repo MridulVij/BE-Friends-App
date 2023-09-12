@@ -199,7 +199,7 @@ class _GetStartedState extends State<GetStarted> {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(
+                            Navigator.pushReplacementNamed(
                                 context, RoutesName.authverifier);
                           },
                           child: Text(
