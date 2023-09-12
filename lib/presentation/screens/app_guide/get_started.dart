@@ -21,7 +21,7 @@ class _GetStartedState extends State<GetStarted> {
       child: Container(
         width: double.infinity,
         height: 812 * fem,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment(0.003, 1),
             end: Alignment(0.003, -1),
@@ -63,7 +63,7 @@ class _GetStartedState extends State<GetStarted> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10 * fem),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment(-0.795, 0.767),
                           end: Alignment(0.831, -0.807),
                           colors: <Color>[
@@ -90,7 +90,7 @@ class _GetStartedState extends State<GetStarted> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10 * fem),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment(-0.522, -0.157),
                           end: Alignment(0.503, 0.143),
                           colors: <Color>[Color(0x438a1a99), Color(0x7f6f1097)],
@@ -114,7 +114,7 @@ class _GetStartedState extends State<GetStarted> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10 * fem),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment(-0.516, -0.885),
                           end: Alignment(0.509, 0.865),
                           colors: <Color>[Color(0x438a1a99), Color(0x7f6f1097)],
@@ -138,7 +138,7 @@ class _GetStartedState extends State<GetStarted> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10 * fem),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment(0.831, 0.807),
                           end: Alignment(-0.795, -0.767),
                           colors: <Color>[Color(0x8a1a99), Color(0x6f1097)],
@@ -185,7 +185,7 @@ class _GetStartedState extends State<GetStarted> {
                     height: 52 * fem,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30 * fem),
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment(1, 1),
                         end: Alignment(-1, -1),
                         colors: <Color>[
@@ -210,7 +210,7 @@ class _GetStartedState extends State<GetStarted> {
                               fontWeight: FontWeight.w700,
                               height: 1.5 * ffem / fem,
                               letterSpacing: 0.6000000238 * fem,
-                              color: Color(0xffffffff),
+                              color: const Color(0xffffffff),
                             ),
                           ),
                         ),
