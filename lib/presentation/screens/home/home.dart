@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/sos/emergencyCall.dart';
 import 'package:guardians_suicide_prevention_app/presentation/screens/video_suggestion/shorts_videos.dart';
 
 import '../ai_chatbot/chatmodel.dart';
@@ -16,7 +17,8 @@ class _DashboardMainState extends State<DashboardMain> {
   List<Widget> _bottomNavbarScreens = [
     HelpAndSupport(),
     ShortVideos(),
-    ChatModel()
+    ChatModel(),
+    EmergencyCall(),
   ];
 
   @override
@@ -52,6 +54,8 @@ class _DashboardMainState extends State<DashboardMain> {
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/icons/chatbot.png')),
                     label: "ChatBot"),
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage('assets/icons/emergency-call.png')), label: "Help"),
               ])
           // ElevatedButton(
           // currentIndex: _currentIndex,

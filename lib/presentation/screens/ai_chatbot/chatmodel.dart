@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+// import 'package:guardians_suicide_prevention_app/presentation/screens/sos/emergencyCall.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 import 'chat_messagesUI.dart';
 
@@ -66,12 +69,17 @@ class _ChatModelState extends State<ChatModel> {
         );
       }
 
-      ChatMessageUI opening = ChatMessageUI(
+      ChatMessageUI opening1 = ChatMessageUI(
         text: 'This is a safe space, we can talk about your feelings safely',
         sender: 'Therapist',
       );
+      ChatMessageUI opening2 = ChatMessageUI(
+        text: 'Enter "Help!" for calling Suicide HelpLine number immediately from here itself',
+        sender: 'Therapist',
+      );
       setState(() {
-        _messages.insert(0, opening);
+        _messages.insert(0, opening1);
+        _messages.insert(0, opening2);
       });
 
       _prompts.addListener(() {
@@ -86,6 +94,7 @@ class _ChatModelState extends State<ChatModel> {
       _messages.insert(0, message);
     });
   }
+
 
   Future<void> sendGptRequest(String userMessage) async {
     final apiKey =
@@ -145,6 +154,19 @@ class _ChatModelState extends State<ChatModel> {
     }
   }
 
+  void makeEmergencyCall() async {
+    final Uri url = Uri(
+      scheme: 'tel',
+      path: '9152987821',
+    );
+    final String urlString =url.toString();
+    if (await canLaunch(urlString)) {
+      await launch(urlString);
+    } else {
+      print('Can\'t Launch');
+    }
+  }
+
   Widget _text_field() {
     return Row(
       children: [
@@ -176,12 +198,19 @@ class _ChatModelState extends State<ChatModel> {
             ),
           ),
         ),
+
         StreamBuilder<String>(
           stream: textFieldStream,
           builder: (context, snapshot) {
             return InkWell(
               onTap: () {
-                if (_prompts.text.isNotEmpty) {
+                // Check if the user's message is an emergency request
+                String userMessage = _prompts.text.toLowerCase();
+                if (userMessage == 'help!' || userMessage == 'Help!' || userMessage == 'HELP!') {
+                  makeEmergencyCall();
+                  _prompts.clear();
+                } else {
+                  // Send the user's message to GPT
                   _addMessage(_prompts.text, 'User');
                   sendGptRequest(_prompts.text);
                   _prompts.clear();

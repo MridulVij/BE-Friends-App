@@ -261,6 +261,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
                 Expanded(
                   child: selectedVideoLink.isNotEmpty
                       ? Container()

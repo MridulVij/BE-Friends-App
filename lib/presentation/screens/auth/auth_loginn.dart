@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_otp.dart';
+// import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_otp.dart';
 import 'package:provider/provider.dart';
 
-import '../home/home.dart';
+// import '../home/home.dart';
 import 'google_sign_in_provider.dart';
 
 class AuthLOGIN extends StatefulWidget {
