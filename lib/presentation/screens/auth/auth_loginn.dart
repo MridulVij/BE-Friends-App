@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guardians_suicide_prevention_app/presentation/screens/home/home.dart';
 // import 'package:guardians_suicide_prevention_app/presentation/screens/auth/auth_otp.dart';
 import 'package:provider/provider.dart';
 
@@ -144,7 +145,11 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                         listen: false);
                     provider.googleLogin();
                   },
-                  child: const Text("Sign in with Google"))
+                  child: const Text("Sign In with Google")),
+              SizedBox(height: 10,),
+              ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardMain(),));
+              }, child: const Text('Sign In as Guest'))
             ],
           ),
         ),
