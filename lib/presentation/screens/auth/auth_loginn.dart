@@ -147,7 +147,7 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                     provider.googleLogin();
                   },
                   child: const Text("Sign In with Google")),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ElevatedButton(
