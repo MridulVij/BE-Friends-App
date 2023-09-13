@@ -3,6 +3,7 @@ import 'package:guardians_suicide_prevention_app/presentation/screens/auth/googl
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../domain/ads/ads.dart';
 import '../../../route_names.dart';
 
 class HelpAndSupport extends StatefulWidget {
@@ -197,6 +198,19 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Ads().showInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Ads.rewardedAd?.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: WillPopScope(
@@ -280,8 +294,6 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    // here is a problem
-
                                     String keyword = fitnessFAQs[index];
                                     String? videoLink =
                                         keywordToVideoMap[keyword];
@@ -344,7 +356,8 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                                 itemCount: matchQuery.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
-                                    onTap: () {
+                                    onTap: () async {
+                                      await Ads().showInterstitialAd();
                                       String keyword = fitnessFAQs[index];
                                       String? videoLink =
                                           keywordToVideoMap[keyword];

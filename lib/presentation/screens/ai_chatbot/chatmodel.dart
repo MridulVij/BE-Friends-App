@@ -6,7 +6,7 @@ import 'dart:async';
 // import 'package:guardians_suicide_prevention_app/presentation/screens/sos/emergencyCall.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
+import '../../../domain/ads/ads.dart';
 import 'chat_messagesUI.dart';
 
 class ChatModel extends StatefulWidget {
@@ -27,6 +27,7 @@ class _ChatModelState extends State<ChatModel> {
   @override
   void initState() {
     super.initState();
+    Ads().showInterstitialAd();
 
     // Initialize SharedPreferences
     SharedPreferences.getInstance().then((prefs) {
@@ -50,7 +51,8 @@ class _ChatModelState extends State<ChatModel> {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-                        prefs.setBool('understood', true); // Store the user's understanding
+                        prefs.setBool('understood',
+                            true); // Store the user's understanding
                       },
                       child: Text(
                         "I Understand",
@@ -74,7 +76,8 @@ class _ChatModelState extends State<ChatModel> {
         sender: 'Therapist',
       );
       ChatMessageUI opening2 = ChatMessageUI(
-        text: 'Enter "Help!" for calling Suicide HelpLine number immediately from here itself',
+        text:
+            'Enter "Help!" for calling Suicide HelpLine number immediately from here itself',
         sender: 'Therapist',
       );
       setState(() {
@@ -95,10 +98,8 @@ class _ChatModelState extends State<ChatModel> {
     });
   }
 
-
   Future<void> sendGptRequest(String userMessage) async {
-    final apiKey =
-        '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';
+    final apiKey = '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';
     final apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     final headers = {
@@ -134,7 +135,7 @@ class _ChatModelState extends State<ChatModel> {
     if (response.statusCode == 200) {
       final responseBody = json.decode(response.body);
       final assistantResponse =
-      responseBody['choices'][0]['message']['content'];
+          responseBody['choices'][0]['message']['content'];
       ChatMessageUI aimessage = ChatMessageUI(
         text: assistantResponse,
         sender: 'Therapist',
@@ -159,7 +160,7 @@ class _ChatModelState extends State<ChatModel> {
       scheme: 'tel',
       path: '9152987821',
     );
-    final String urlString =url.toString();
+    final String urlString = url.toString();
     if (await canLaunch(urlString)) {
       await launch(urlString);
     } else {
@@ -198,7 +199,6 @@ class _ChatModelState extends State<ChatModel> {
             ),
           ),
         ),
-
         StreamBuilder<String>(
           stream: textFieldStream,
           builder: (context, snapshot) {
@@ -206,7 +206,9 @@ class _ChatModelState extends State<ChatModel> {
               onTap: () {
                 // Check if the user's message is an emergency request
                 String userMessage = _prompts.text.toLowerCase();
-                if (userMessage == 'help!' || userMessage == 'Help!' || userMessage == 'HELP!') {
+                if (userMessage == 'help!' ||
+                    userMessage == 'Help!' ||
+                    userMessage == 'HELP!') {
                   makeEmergencyCall();
                   _prompts.clear();
                 } else {
@@ -229,8 +231,9 @@ class _ChatModelState extends State<ChatModel> {
                 child: Icon(
                   size: 35,
                   Icons.send_sharp,
-                  color:
-                  snapshot.data?.isEmpty ?? true ? Colors.grey : Colors.white,
+                  color: snapshot.data?.isEmpty ?? true
+                      ? Colors.grey
+                      : Colors.white,
                 ),
               ),
             );
@@ -242,6 +245,7 @@ class _ChatModelState extends State<ChatModel> {
 
   @override
   void dispose() {
+    Ads.rewardedAd?.dispose();
     _textFieldStreamController.close();
     super.dispose();
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:guardians_suicide_prevention_app/route_names.dart';
 import 'package:provider/provider.dart';
 import 'presentation/screens/auth/google_sign_in_provider.dart';
@@ -9,6 +10,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // await FirebaseAppCheck.instance.activate();
+  // WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const MyApp());
 }
 

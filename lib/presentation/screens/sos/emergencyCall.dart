@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../domain/ads/ads.dart';
+
 class EmergencyCall extends StatefulWidget {
   const EmergencyCall({super.key});
 
@@ -39,7 +41,8 @@ class _EmergencyCallState extends State<EmergencyCall> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () {
+              onTap: () async {
+                await Ads().showInterstitialAd();
                 makeEmergencyCall();
               },
               child: Container(
@@ -69,13 +72,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
                 ),
               ),
             ),
-            SizedBox(height: 40), 
+            SizedBox(height: 40),
             Container(
               height: 50,
               decoration: BoxDecoration(
                   color: Colors.deepPurple[50],
-                  borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.circular(10)),
               child: Text(
                 'Press this button to call the suicide helpline',
                 style: TextStyle(
