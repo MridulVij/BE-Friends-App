@@ -1,10 +1,17 @@
-# guardians_suicide_prevention_app
+# BE Friends
+# Status - Completed
+# Apk Size - 
 
-A new Flutter project.
+//Install Example App
+Go to folder and install >> Release Apk >> BE Friends.apk
 
-## Getting Started
+// Run App
+Step 0 - Open Terminal in VS Code
+Step 1 - Take 'git clone' 
+Step 2 - Run 'flutter pub get'
+Step 3 - Press 'F5'
+Step 4 - App build will starting - Run the app now
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
