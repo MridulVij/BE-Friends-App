@@ -4,6 +4,7 @@ import 'package:guardians_suicide_prevention_app/presentation/screens/home/home.
 import 'package:provider/provider.dart';
 
 // import '../home/home.dart';
+import '../../../route_names.dart';
 import 'google_sign_in_provider.dart';
 
 class AuthLOGIN extends StatefulWidget {
@@ -146,10 +147,15 @@ class _AuthLOGINState extends State<AuthLOGIN> {
                     provider.googleLogin();
                   },
                   child: const Text("Sign In with Google")),
-              SizedBox(height: 10,),
-              ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardMain(),));
-              }, child: const Text('Sign In as Guest'))
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, RoutesName.dashboardMain);
+                  },
+                  child: const Text('Sign In as Guest'))
             ],
           ),
         ),
