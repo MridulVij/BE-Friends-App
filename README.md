@@ -7,9 +7,13 @@ Go to folder and install >> Release Apk >> BE Friends.apk
 
 // Run App
 Step 0 - Open Terminal in VS Code
+
 Step 1 - Take 'git clone' 
+
 Step 2 - Run 'flutter pub get'
+
 Step 3 - Press 'F5'
+
 Step 4 - App build will starting - Run the app now
 
 
