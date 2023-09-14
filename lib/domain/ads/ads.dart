@@ -7,7 +7,7 @@ class Ads {
 
   void createRewardedAd() {
     RewardedAd.load(
-      adUnitId: 'ca-app-pub-5498431563071990/1408002390',
+      adUnitId: 'ca-app-pub-5498431563071990/1780688864',
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) {

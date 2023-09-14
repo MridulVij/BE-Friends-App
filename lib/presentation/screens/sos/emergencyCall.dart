@@ -14,7 +14,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
   @override
   void initState() {
     super.initState();
-    Ads().createRewardedAd();
+    Ads().showInterstitialAd();
   }
 
   // Function to make the emergency call
@@ -29,6 +29,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
     } else {
       print('Can\'t Launch');
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Ads.rewardedAd!.dispose();
   }
 
   @override

@@ -15,7 +15,13 @@ class _GetStartedState extends State<GetStarted> {
   @override
   void initState() {
     super.initState();
-    Ads().createRewardedAd();
+    Ads().showInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Ads.rewardedAd!.dispose();
   }
 
   @override
