@@ -200,7 +200,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
   @override
   void initState() {
     super.initState();
-    Ads().showInterstitialAd();
+    Ads().createRewardedAd();
   }
 
   @override

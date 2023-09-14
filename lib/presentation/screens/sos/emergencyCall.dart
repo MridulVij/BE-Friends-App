@@ -11,6 +11,12 @@ class EmergencyCall extends StatefulWidget {
 }
 
 class _EmergencyCallState extends State<EmergencyCall> {
+  @override
+  void initState() {
+    super.initState();
+    Ads().createRewardedAd();
+  }
+
   // Function to make the emergency call
   void makeEmergencyCall() async {
     final Uri url = Uri(

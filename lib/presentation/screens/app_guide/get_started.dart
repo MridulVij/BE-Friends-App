@@ -4,12 +4,20 @@ import 'dart:ui';
 
 import 'package:guardians_suicide_prevention_app/route_names.dart';
 
+import '../../../domain/ads/ads.dart';
+
 class GetStarted extends StatefulWidget {
   @override
   State<GetStarted> createState() => _GetStartedState();
 }
 
 class _GetStartedState extends State<GetStarted> {
+  @override
+  void initState() {
+    super.initState();
+    Ads().createRewardedAd();
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
