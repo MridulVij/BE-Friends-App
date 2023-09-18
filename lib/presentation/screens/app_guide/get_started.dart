@@ -15,14 +15,14 @@ class _GetStartedState extends State<GetStarted> {
   @override
   void initState() {
     super.initState();
-    Ads().showInterstitialAd();
+    // Ads().showInterstitialAd();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    Ads.rewardedAd!.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   Ads.rewardedAd!.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
